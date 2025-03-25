@@ -1,0 +1,191 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import './styles/colors.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 96%;       /* Light Gray #F5F5F5 */
+    --foreground: 200 4% 29%;     /* Dark Gray #454C4E */
+
+    --card: 0 0% 100%;            /* White #FFFFFF */
+    --card-foreground: 200 4% 29%;/* Dark Gray #454C4E */
+
+    --popover: 0 0% 100%;         /* White #FFFFFF */
+    --popover-foreground: 200 4% 29%; /* Dark Gray #454C4E */
+
+    --primary: 254 27% 43%;       /* Purple #514F8A */
+    --primary-foreground: 0 0% 100%; /* White #FFFFFF */
+
+    --secondary: 37 96% 51%;      /* Orange #FB9F09 */
+    --secondary-foreground: 0 0% 100%; /* White #FFFFFF */
+
+    --muted: 0 0% 96%;            /* Light Gray #F5F5F5 */
+    --muted-foreground: 200 4% 45%; /* Lighter Dark Gray */
+
+    --accent: 5 59% 59%;          /* Red #D85854 */
+    --accent-foreground: 0 0% 100%; /* White #FFFFFF */
+
+    --destructive: 5 59% 59%;     /* Red #D85854 */
+    --destructive-foreground: 0 0% 100%; /* White #FFFFFF */
+
+    --border: 0 0% 90%;           /* Light Border Color */
+    --input: 0 0% 90%;            /* Light Input Color */
+    --ring: 254 27% 43%;          /* Purple #514F8A */
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 254 27% 43%; /* Purple #514F8A */
+    --sidebar-foreground: 0 0% 100%;   /* White #FFFFFF */
+    --sidebar-primary: 37 96% 51%;     /* Orange #FB9F09 */
+    --sidebar-primary-foreground: 0 0% 100%; /* White #FFFFFF */
+    --sidebar-accent: 5 59% 59%;       /* Red #D85854 */
+    --sidebar-accent-foreground: 0 0% 100%; /* White #FFFFFF */
+    --sidebar-border: 254 27% 33%;
+    --sidebar-ring: 37 96% 51%;        /* Orange #FB9F09 */
+  }
+
+  .dark {
+    --background: 200 4% 29%;     /* Dark Gray #454C4E */
+    --foreground: 0 0% 96%;       /* Light Gray #F5F5F5 */
+
+    --card: 200 4% 35%;           /* Slightly lighter Dark Gray */
+    --card-foreground: 0 0% 96%;  /* Light Gray #F5F5F5 */
+
+    --popover: 200 4% 35%;        /* Slightly lighter Dark Gray */
+    --popover-foreground: 0 0% 96%; /* Light Gray #F5F5F5 */
+
+    --primary: 37 96% 51%;        /* Orange #FB9F09 */
+    --primary-foreground: 0 0% 100%; /* White #FFFFFF */
+
+    --secondary: 254 27% 43%;     /* Purple #514F8A */
+    --secondary-foreground: 0 0% 100%; /* White #FFFFFF */
+
+    --muted: 200 4% 35%;          /* Slightly lighter Dark Gray */
+    --muted-foreground: 0 0% 96%; /* Light Gray #F5F5F5 */
+
+    --accent: 5 59% 59%;          /* Red #D85854 */
+    --accent-foreground: 0 0% 100%; /* White #FFFFFF */
+
+    --destructive: 5 59% 45%;     /* Darker Red */
+    --destructive-foreground: 0 0% 100%; /* White #FFFFFF */
+
+    --border: 200 4% 35%;
+    --input: 200 4% 35%;
+    --ring: 37 96% 51%;           /* Orange #FB9F09 */
+    
+    --sidebar-background: 200 4% 25%; /* Darker Dark Gray */
+    --sidebar-foreground: 0 0% 100%;  /* White #FFFFFF */
+    --sidebar-primary: 37 96% 51%;    /* Orange #FB9F09 */
+    --sidebar-primary-foreground: 0 0% 100%; /* White #FFFFFF */
+    --sidebar-accent: 254 27% 43%;    /* Purple #514F8A */
+    --sidebar-accent-foreground: 0 0% 100%; /* White #FFFFFF */
+    --sidebar-border: 200 4% 35%;
+    --sidebar-ring: 37 96% 51%;       /* Orange #FB9F09 */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 rounded-lg shadow-sm;
+  }
+  
+  .glass-button {
+    @apply px-6 py-2.5 bg-purple-600 text-white rounded-md transition-all 
+           hover:bg-orange-500 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+  }
+  
+  .section-title {
+    @apply text-3xl sm:text-4xl font-bold text-purple-600 mb-4;
+  }
+  
+  .section-subtitle {
+    @apply text-lg text-gray-700 max-w-3xl mx-auto mb-10;
+  }
+
+  .nav-link {
+    @apply relative inline-block font-medium text-gray-700 hover:text-orange-500 transition-colors;
+  }
+  
+  .nav-link::after {
+    @apply content-[''] absolute w-0 h-0.5 bg-orange-500 left-0 -bottom-1 transition-all duration-300;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  .nav-link-active {
+    @apply text-orange-500;
+  }
+  
+  .nav-link-active::after {
+    @apply w-full;
+  }
+  
+  .submenu {
+    @apply hidden group-hover:block absolute top-full left-0 mt-1 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-20;
+  }
+
+  .slide-enter {
+    @apply opacity-0 translate-y-4;
+  }
+  
+  .slide-enter-active {
+    @apply opacity-100 translate-y-0 transition duration-300;
+  }
+  
+  .slide-exit {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .slide-exit-active {
+    @apply opacity-0 translate-y-4 transition duration-300;
+  }
+
+  /* Status indicators */
+  .status-success {
+    @apply text-green-600 bg-green-100 border border-green-200;
+  }
+  
+  .status-warning {
+    @apply text-orange-500 bg-orange-100 border border-orange-200;
+  }
+  
+  .status-error {
+    @apply text-red-600 bg-red-100 border border-red-200;
+  }
+  
+  .status-info {
+    @apply text-purple-600 bg-purple-100 border border-purple-200;
+  }
+}
+
+html, body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Transition for hovering elements */
+button, a {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}

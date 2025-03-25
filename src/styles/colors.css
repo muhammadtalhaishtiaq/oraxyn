@@ -1,0 +1,36 @@
+
+:root {
+    /* Primary Colors */
+    --color-orange: #FB9F09;
+    --color-red: #D85854;
+    --color-purple: #514F8A;
+    --color-blue-purple: #514F8A;
+    --color-light-gray: #F5F5F5;
+    --color-dark-gray: #454C4E;
+    --color-white: #FFFFFF;
+    /* Additional Colors from Oraxyn */
+    --color-oraxyn-red: #E24B45;
+    --color-oraxyn-blue: #284F8D;
+    --color-oraxyn-dark-blue: #1E3A68;
+    --color-oraxyn-purple: #514F8A;
+    /* Functional Colors */
+    --color-primary: var(--color-oraxyn-blue);
+    --color-secondary: var(--color-oraxyn-red);
+    --color-accent: var(--color-orange);
+    --color-background: var(--color-light-gray);
+    --color-text: var(--color-dark-gray);
+    --color-text-light: var(--color-white);
+    /* Status Colors */
+    --color-success: #28A745;
+    --color-warning: var(--color-orange);
+    --color-danger: var(--color-red);
+    --color-info: var(--color-blue-purple);
+}
+
+
+/* Dark mode overrides - we can customize these later */
+
+.dark {
+    --color-background: var(--color-dark-gray);
+    --color-text: var(--color-light-gray);
+}
