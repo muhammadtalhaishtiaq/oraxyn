@@ -133,18 +133,18 @@ const Navbar = () => {
       icon: <FileText className="h-5 w-5 text-oraxyn-turquoise" />,
       description: "Latest insights and articles"
     },
-    // { 
-    //   title: "Knowledge Base", 
-    //   path: "/resources/knowledge-base", 
-    //   icon: <HelpCircle className="h-5 w-5 text-oraxyn-orange" />,
-    //   description: "Guides and documentation"
-    // },
-    // { 
-    //   title: "Webinars", 
-    //   path: "/resources/webinars", 
-    //   icon: <ExternalLink className="h-5 w-5 text-oraxyn-purple" />,
-    //   description: "Educational videos and presentations"
-    // },
+    { 
+      title: "Knowledge Base", 
+      path: "/resources/knowledge-base", 
+      icon: <HelpCircle className="h-5 w-5 text-oraxyn-orange" />,
+      description: "Guides and documentation"
+    },
+    { 
+      title: "Webinars", 
+      path: "/resources/webinars", 
+      icon: <ExternalLink className="h-5 w-5 text-oraxyn-purple" />,
+      description: "Educational videos and presentations"
+    },
     { 
       title: "Support", 
       path: "/resources/support", 
@@ -160,18 +160,18 @@ const Navbar = () => {
       icon: <Building className="h-5 w-5 text-oraxyn-turquoise" />,
       description: "Our story and mission"
     },
-    // { 
-    //   title: "Careers", 
-    //   path: "/company/careers", 
-    //   icon: <Users className="h-5 w-5 text-oraxyn-green" />,
-    //   description: "Join our growing team"
-    // },
-    // { 
-    //   title: "Press", 
-    //   path: "/company/press", 
-    //   icon: <FileText className="h-5 w-5 text-oraxyn-orange" />,
-    //   description: "News and announcements"
-    // },
+    { 
+      title: "Careers", 
+      path: "/company/careers", 
+      icon: <Users className="h-5 w-5 text-oraxyn-green" />,
+      description: "Join our growing team"
+    },
+    { 
+      title: "Press", 
+      path: "/company/press", 
+      icon: <FileText className="h-5 w-5 text-oraxyn-orange" />,
+      description: "News and announcements"
+    },
     { 
       title: "Contact", 
       path: "/contact", 

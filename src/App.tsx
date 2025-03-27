@@ -13,15 +13,11 @@ import Enterprise from '@/pages/solutions/Enterprise';
 import Amazon from '@/pages/platform/Amazon';
 import Google from '@/pages/platform/Google';
 import Analytics from '@/pages/platform/Analytics';
-import AmazonAdvertising from '@/pages/amazon/AmazonAdvertising';
-import Meta from '@/pages/platform/Meta';
-import CaseStudies from '@/pages/solutions/CaseStudies';
-import Pricing from '@/pages/Pricing';
-import Blog from '@/pages/resources/Blog';
-import Support from '@/pages/resources/Support';
-import About from '@/pages/company/About';
-import Contact from '@/pages/Contact';
-// import Contact from '@/pages/company/Contact';
+import ToolsPage from '@/pages/dashboard/ToolsPage';
+import KeywordGeneratorPage from '@/pages/dashboard/tools/KeywordGeneratorPage';
+import AdCopyGeneratorPage from '@/pages/dashboard/tools/AdCopyGeneratorPage';
+import CampaignsPage from '@/pages/dashboard/CampaignsPage';
+
 function App() {
   return (
     <AuthProvider>
@@ -38,14 +34,11 @@ function App() {
           <Route path="/platform/amazon" element={<Amazon />} />
           <Route path="/platform/google" element={<Google />} />
           <Route path="/platform/analytics" element={<Analytics />} />
-          <Route path="/platform/meta" element={<Meta />} />
-          <Route path="/amazon/advertising" element={<AmazonAdvertising />} />
-          <Route path="/solutions/case-studies" element={<CaseStudies />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/resources/blog" element={<Blog />} />
-          <Route path="/resources/support" element={<Support />} />
-          <Route path="/company/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/dashboard/tools" element={<ToolsPage />} />
+          <Route path="/dashboard/tools/keywords" element={<KeywordGeneratorPage />} />
+          <Route path="/dashboard/tools/ad-copy" element={<AdCopyGeneratorPage />} />
+          <Route path="/dashboard/campaigns" element={<CampaignsPage />} />
+          <Route path="/dashboard/tools/scheduler" element={<Dashboard />} /> {/* Will be implemented as separate component */}
         </Routes>
       </BrowserRouter>
     </AuthProvider>

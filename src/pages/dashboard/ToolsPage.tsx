@@ -5,7 +5,7 @@ import { useAuth } from '@/hooks/useAuth';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Wrench, DollarSign, LayoutList, Sparkles } from 'lucide-react';
+import { Wrench, DollarSign, LayoutList, Sparkles, FileText, Clock } from 'lucide-react';
 
 const ToolsPage = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -28,10 +28,17 @@ const ToolsPage = () => {
   const tools = [
     {
       title: 'Keyword Generator',
-      description: 'AI-powered tool to generate high-converting keywords for your Amazon products',
+      description: 'AI-powered tool to generate high-converting keywords for your marketplace products',
       icon: <LayoutList className="h-10 w-10 text-oraxyn-turquoise" />,
       path: '/dashboard/tools/keywords',
       buttonText: 'Generate Keywords'
+    },
+    {
+      title: 'Ad Copy Generator',
+      description: 'Create optimized ad copy and images for Amazon, Walmart, and eBay listings',
+      icon: <FileText className="h-10 w-10 text-oraxyn-purple" />,
+      path: '/dashboard/tools/ad-copy',
+      buttonText: 'Create Ad Copy'
     },
     {
       title: 'Bid Optimizer',
@@ -39,6 +46,13 @@ const ToolsPage = () => {
       icon: <DollarSign className="h-10 w-10 text-oraxyn-green" />,
       path: '/dashboard/tools/optimizer',
       buttonText: 'Optimize Bids'
+    },
+    {
+      title: 'Campaign Scheduler',
+      description: 'Schedule campaigns to run at specific times based on performance data',
+      icon: <Clock className="h-10 w-10 text-oraxyn-blue" />,
+      path: '/dashboard/tools/scheduler',
+      buttonText: 'Schedule Campaigns'
     },
     {
       title: 'AI Campaign Creator',
@@ -55,7 +69,7 @@ const ToolsPage = () => {
         <div>
           <h1 className="text-3xl font-bold text-oraxyn-gray mb-2">Tools & Utilities</h1>
           <p className="text-gray-500">
-            Optimize your advertising with our powerful toolset
+            Optimize your marketplace advertising with our powerful AI toolset
           </p>
         </div>
         
