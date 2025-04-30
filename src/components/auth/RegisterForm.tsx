@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
@@ -20,6 +19,7 @@ const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [passwordStrength, setPasswordStrength] = useState(0);
+  const [emailError, setEmailError] = useState('');
   
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -39,9 +39,19 @@ const RegisterForm = () => {
     }
   };
   
+  const validateEmail = (email: string) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+  
   const validateForm = () => {
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
       setError('Please fill in all required fields');
+      return false;
+    }
+    
+    if (!validateEmail(formData.email)) {
+      setError('Please enter a valid email address');
       return false;
     }
     
@@ -151,7 +161,12 @@ const RegisterForm = () => {
             placeholder="your@email.com"
             disabled={isLoading}
             required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            title="Please enter a valid email address"
           />
+          {emailError && (
+            <p className="mt-1 text-xs text-red-600">{emailError}</p>
+          )}
         </div>
         
         <div>
@@ -184,40 +199,11 @@ const RegisterForm = () => {
             placeholder="••••••••"
             disabled={isLoading}
             required
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$"
+            title="Please create a stronger password. Include uppercase letters, numbers, and special characters."
           />
-          
-          {/* Password strength meter */}
-          {formData.password && (
-            <div className="mt-2">
-              <div className="flex h-1 w-full space-x-1">
-                {[1, 2, 3, 4].map((level) => (
-                  <div
-                    key={level}
-                    className={`h-full w-1/4 rounded-sm transition-colors ${
-                      passwordStrength >= level
-                        ? level <= 1
-                          ? 'bg-red-400'
-                          : level <= 2
-                          ? 'bg-orange-400'
-                          : level <= 3
-                          ? 'bg-yellow-400'
-                          : 'bg-green-400'
-                        : 'bg-gray-200'
-                    }`}
-                  />
-                ))}
-              </div>
-              <div className="mt-1 flex justify-between">
-                <div className="text-xs text-gray-500">
-                  {passwordStrength === 0 && "Weak"}
-                  {passwordStrength === 1 && "Fair"}
-                  {passwordStrength === 2 && "Good"}
-                  {passwordStrength === 3 && "Strong"}
-                  {passwordStrength === 4 && "Very strong"}
-                </div>
-                <div className="text-xs text-gray-500">8+ characters</div>
-              </div>
-            </div>
+          {passwordStrength < 3 && (
+            <p className="mt-1 text-xs text-red-600">Password must be at least 8 characters long and include uppercase letters, numbers, and special characters.</p>
           )}
         </div>
         
@@ -283,28 +269,4 @@ const RegisterForm = () => {
             Sign in
           </Link>
         </div>
-      </form>
-      
-      <div className="mt-8 pt-6 border-t border-gray-200">
-        <h3 className="text-sm font-medium text-oraxyn-gray mb-4">
-          Creating an account gives you access to:
-        </h3>
-        <ul className="space-y-2">
-          {[
-            "AI-powered campaign optimization",
-            "Cross-channel advertising management",
-            "Product-level performance insights",
-            "Unified reporting dashboard"
-          ].map((benefit, index) => (
-            <li key={index} className="flex items-start">
-              <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-              <span className="text-gray-600 text-sm">{benefit}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-};
 
-export default RegisterForm;

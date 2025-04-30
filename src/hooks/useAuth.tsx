@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { toast } from '@/hooks/use-toast';
-import { loginUser, registerUser, getUserById, logoutUser } from '@/api/auth';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
 
@@ -26,25 +25,35 @@ interface AuthContextType {
   logout: () => void;
 }
 
-// Create Auth Context
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const createAuthContext = () => {
+  const AuthContext = createContext<AuthContextType | undefined>(undefined);
+  const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (context === undefined) {
+      throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
+  };
+  return { AuthContext, useAuth };
+};
+
+export const { AuthContext, useAuth } = createAuthContext();
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [supabaseUser, setSupabaseUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
-    // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, newSession) => {
         console.log('Auth state changed:', event);
         setSession(newSession);
-        
+
         if (newSession) {
           setSupabaseUser(newSession.user);
-          
+
           // Get full user profile
           try {
             const userProfile = await getUserById(newSession.user.id);
@@ -59,29 +68,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     );
 
-    // THEN check for existing session
-    supabase.auth.getSession().then(async ({ data: { session: existingSession } }) => {
-      setSession(existingSession);
-      
-      if (existingSession) {
-        setSupabaseUser(existingSession.user);
-        
-        try {
-          const userProfile = await getUserById(existingSession.user.id);
-          setUser(userProfile);
-        } catch (error) {
-          console.error('Error fetching initial user profile:', error);
-        }
-      }
-      
-      setLoading(false);
-    });
-
     return () => {
       subscription.unsubscribe();
     };
   }, []);
-  
+
   const login = async (email: string, password: string) => {
     try {
       setLoading(true);
@@ -92,54 +83,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       });
     } catch (error: any) {
       console.error('Login error:', error);
-      
-      // Special handling for email confirmation errors - attempt direct login since we've disabled confirmations
-      if (error.message?.includes('not confirmed') || error?.code === 'email_not_confirmed') {
-        try {
-          const { data, error: signInError } = await supabase.auth.signInWithPassword({
-            email,
-            password
-          });
-          
-          if (signInError) throw signInError;
-          
-          toast({
-            title: 'Login successful',
-            description: 'You have been successfully logged in.'
-          });
-          return;
-        } catch (retryError) {
-          console.error('Retry login error:', retryError);
-          toast({
-            title: 'Login failed',
-            description: 'Invalid email or password.',
-            variant: 'destructive'
-          });
-          throw retryError;
-        }
-      }
-      
-      // Handle specific error for pending approval
-      if (error.message?.includes('pending approval')) {
-        toast({
-          title: 'Login failed',
-          description: error.message,
-          variant: 'destructive'
-        });
-      } else {
-        toast({
-          title: 'Login failed',
-          description: error.message || 'Invalid email or password.',
-          variant: 'destructive'
-        });
-      }
-      
+      toast({
+        title: 'Login failed',
+        description: error.message || 'Invalid email or password.',
+        variant: 'destructive'
+      });
       throw error;
     } finally {
       setLoading(false);
     }
   };
-  
+
   const register = async (userData: any) => {
     try {
       setLoading(true);
@@ -160,7 +114,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoading(false);
     }
   };
-  
+
   const logout = async () => {
     try {
       setLoading(true);
@@ -206,10 +160,3 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
