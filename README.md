@@ -4,27 +4,6 @@
 
 AI cloud marketing platform
 
-<!-- **URL**: https://lovable.dev/projects/7dcfce3f-5957-4a2a-a732-e0f7fb93b6dc
-
-## How can I edit this code?
-
-There are several ways of editing your application. -->
-
-<!-- **Use Oraxyn** -->
-
-<!-- Simply visit the [Oraxyn Project](https://lovable.dev/projects/7dcfce3f-5957-4a2a-a732-e0f7fb93b6dc) and start prompting. -->
-
-<!-- Changes made via Oraxyn will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Oraxyn.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh -->
 # Step 1: Clone the repository using the project's Git URL.
 git clone <YOUR_GIT_URL>
 
@@ -61,11 +40,3 @@ This project is built with .
 - React
 - shadcn-ui
 - Tailwind CSS
-
-<!-- ## How can I deploy this project? -->
-
-<!-- Simply open [Oraxyn](https://lovable.dev/projects/7dcfce3f-5957-4a2a-a732-e0f7fb93b6dc) and click on Share -> Publish. -->
-
-<!-- ## I want to use a custom domain - is that possible? -->
-
-<!-- We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/) -->
