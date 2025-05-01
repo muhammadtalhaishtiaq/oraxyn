@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
@@ -284,27 +283,9 @@ const RegisterForm = () => {
           </Link>
         </div>
       </form>
-      
-      <div className="mt-8 pt-6 border-t border-gray-200">
-        <h3 className="text-sm font-medium text-oraxyn-gray mb-4">
-          Creating an account gives you access to:
-        </h3>
-        <ul className="space-y-2">
-          {[
-            "AI-powered campaign optimization",
-            "Cross-channel advertising management",
-            "Product-level performance insights",
-            "Unified reporting dashboard"
-          ].map((benefit, index) => (
-            <li key={index} className="flex items-start">
-              <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-              <span className="text-gray-600 text-sm">{benefit}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
 
 export default RegisterForm;
+
